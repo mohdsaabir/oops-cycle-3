@@ -1,0 +1,107 @@
+import java.util.*;
+
+interface queuedemo{
+        void enqueue(int item);
+        void dequeue();
+        void print();
+}
+
+class queues implements queuedemo{
+        int front=-1;
+        int rear=-1;
+        int size;
+        int a[]=new int[20];
+        void getsize(int s)
+        {
+                size=s;
+        }
+        public void enqueue(int item)
+        {
+                if(rear==size-1)
+                {
+                        System.out.println("Queue is full");
+                }
+                else if(front==-1 && rear==-1)
+                {
+                        rear=0;
+                        front=0;
+                        a[rear]=item;
+                }
+                else
+                {
+                        rear++;
+                        a[rear]=item;
+                }
+        }
+        public void dequeue()
+        {
+                if(front==-1&&rear==-1)
+                {
+                        System.out.println("Queue is empty");
+                }
+                else if(front==rear)
+                {
+                        System.out.println("Deleted element is "+a[rear]);
+                        front=-1;
+                        rear=-1;
+                }
+                else
+                {
+                        System.out.println("Deleted element is "+a[rear]);
+                        front++;
+                }
+        }
+        public void print()
+        {
+                int i;
+                if(front==-1&&rear==-1)
+                {
+                        System.out.println("Queue is empty");
+                }
+                else
+                {
+                        System.out.println("Queue is: ");
+                        for(i=front;i<=rear;i++)
+                        {
+                                System.out.println(a[i]);
+                        }
+                }
+        }
+}
+class queue{
+                public static void main(String args[])
+                {
+                        Scanner s=new Scanner(System.in);
+                        int item,opt;
+                        int size;
+                        System.out.println("Enter the size of the queue\n");
+                        size=s.nextInt();
+                        queues q=new queues();
+                        q.getsize(size);
+                        System.out.println("1.ENQUEUE\t2.DEQUEUE\t3.DISPLAY\t4.EXIT\n");
+                        do
+                        {
+                                System.out.println("Enter any option\n");
+                                opt=s.nextInt();
+                                switch(opt)
+                                {
+                                      case 1:System.out.println("Enter element to be inserted\n");
+                                                item=s.nextInt();
+                                                q.enqueue(item);
+                                                break;
+
+                                        case 2:q.dequeue();
+                                        break;
+
+                                        case 3:q.print();
+                                        break;
+
+                                        case 4:break;
+
+                                        default:System.out.println("Invalid option\n");
+                                }
+                        }while(opt!=4);
+
+}
+}
+
