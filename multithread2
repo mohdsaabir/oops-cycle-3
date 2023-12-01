@@ -1,0 +1,52 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class printme{
+        synchronized public void printnumber(int n){
+                int i;
+                for(i=n;i<=10;i=i+2)
+                {
+                        System.out.println(i);
+                        try
+                        {
+                                Thread.sleep(400);
+                        }
+                        catch(Exception e){
+                                e.printStackTrace();
+                        }
+                }
+        }
+}
+
+class even implements Runnable{
+        printme p;
+        even(printme obj){
+                p=obj;
+        }
+        public void run(){
+                p.printnumber(0);
+        }
+}
+
+class odd implements Runnable{
+        printme p;
+        odd(printme obj){
+                p=obj;
+        }
+        public void run(){
+                p.printnumber(1);
+        }
+}
+
+class multithread2m{
+        public static void main(String args[]){
+        printme obj=new printme();
+        even e1=new even(obj);
+        odd o1=new odd(obj);
+        Thread t1=new Thread(e1);
+        Thread t2=new Thread(o1);
+        t1.start();
+        t2.start();
+        }
+}
